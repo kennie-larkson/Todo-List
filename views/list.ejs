@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+</head>
+<body>
+    <% if (whatDay === "Saturday" || whatDay === "Sunday") { %>
+        <h1 style="color: purple;"> <%= whatDay %> Todo List </h1>
+    <% }else{ %>
+    <h1 style="color: orange;"> <%= whatDay %> Todo List  </h1>
+    <% } %>
+</body>
+</html>
