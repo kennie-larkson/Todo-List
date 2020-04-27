@@ -6,10 +6,18 @@
     <title>Todo List</title>
 </head>
 <body>
-    <% if (whatDay === "Saturday" || whatDay === "Sunday") { %>
-        <h1 style="color: purple;"> <%= whatDay %> Todo List </h1>
-    <% }else{ %>
-    <h1 style="color: orange;"> <%= whatDay %> Todo List  </h1>
-    <% } %>
+    <h1><%= whatDay %> </h1>
+
+    <ul>
+        
+        <% new_entry.forEach(element => { %>
+            <li><%= element %> </li>
+        <% }) %>
+    
+    </ul>
+    <form action="/" method="post">
+        <input type="text" name="todo_entry" id="" placeholder="enter todo">
+        <button type="submit">Add entry</button>
+    </form>
 </body>
 </html>

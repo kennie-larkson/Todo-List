@@ -3,54 +3,35 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
 
-
-
 const app = express()
+
+app.use(bodyParser.urlencoded({extended: true}))
 
 app.set('view engine', 'ejs')
 
-
+let newTodos = ["Buy Food","Cook Food","Eat Food"]
 app.get('/',(req,res)=>{
 
     const today = new Date()
-    const currentDay = today.getDay()
-    let day = ""
 
-    switch (currentDay) {
-        case 0:
-            day = 'Sunday'
-            break;
-        case 1:
-            day = 'Monday'   
-            break;
-        case 2:
-            day = 'Tuesday'   
-            break;
-        case 3:
-            day = 'Wednesday'
-            break;
-        case 4:
-            day = 'Thursday'
-            break;
-        case 5:
-            day = 'Friday'          
-            break;
-        case 6:
-            day = 'Saturday'
-            break;
-        default:
-            console.log(`Error: current day is equal to ${currentDay}`);
-    }
-    // if( currentDay === 6 || currentDay === 0  ){
-    //     day = "weekend"
-    // }else{
-    //     day = "weekday"
-    // }
-    res.render('list',{ whatDay: day})
+    let options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric'}
+
+    const day = today.toLocaleDateString("en-US", options)
+    
+    res.render('list',{ whatDay: day, new_entry: newTodos})
 })
 
 app.post('/',(req,res)=>{
-    res.send('We got your post request')
+    let newTodo = req.body.todo_entry
+    console.log(newTodo)
+    newTodos.push(newTodo)
+    // res.send('We got your post request: '+ newTodo)
+    res.redirect("/")
+    // res.render('list',{ whatDay: day, new_entry: newTodo})
 })
 
 
