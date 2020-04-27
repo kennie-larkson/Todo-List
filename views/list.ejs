@@ -4,20 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h1><%= whatDay %> </h1>
 
-    <ul>
-        
-        <% new_entry.forEach(element => { %>
-            <li><%= element %> </li>
-        <% }) %>
+    <div class="box">
+        <h1 id="heading"><%= whatDay %> </h1>
+    </div>
     
-    </ul>
-    <form action="/" method="post">
-        <input type="text" name="todo_entry" id="" placeholder="enter todo">
-        <button type="submit">Add entry</button>
-    </form>
+
+    <div class="box">
+        
+            <% new_entry.forEach(element => { %>
+                <div class="item">
+                    <input type="checkbox" name="" id="">
+                    <p class="item"><%= element %> </p>
+                </div>
+                
+            <% }) %>
+
+            
+                <form class="item" action="/" method="post">
+                    <input type="text" name="todo_entry" id="" placeholder="New Item" autocomplete="off">
+                    <button type="submit">+</button>
+                </form>
+            
+        
+    </div>
+    
+
+       
+        
+   <footer>
+       &copy;<a href="http://twitter.com/kennie_larkson" target="_blank"> Javascript Student 2020</a>
+   </footer>
 </body>
 </html>

@@ -6,17 +6,18 @@ const port = process.env.PORT || 3000
 const app = express()
 
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(express.static('public'))
 
 app.set('view engine', 'ejs')
 
-let newTodos = ["Buy Food","Cook Food","Eat Food"]
+let newTodos = ["Cook Food","Eat Food","Start Coding"]
 app.get('/',(req,res)=>{
 
     const today = new Date()
 
     let options = { 
         weekday: 'long', 
-        year: 'numeric', 
+        // year: 'numeric', 
         month: 'long', 
         day: 'numeric'}
 
