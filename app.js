@@ -10,7 +10,7 @@ app.use(express.static('public'))
 
 app.set('view engine', 'ejs')
 
-let newTodos = ["Cook Food","Eat Food","Start Coding"]
+let newTodos = []
 app.get('/',(req,res)=>{
 
     const today = new Date()
