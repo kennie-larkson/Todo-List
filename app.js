@@ -2,37 +2,48 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
+const day = require(__dirname + '/date')
 
 const app = express()
 
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
+
 app.use(express.static('public'))
 
 app.set('view engine', 'ejs')
 
-let newTodos = []
+let generalTodos = []
+let workTodos = []
+
+
 app.get('/',(req,res)=>{
 
-    const today = new Date()
-
-    let options = { 
-        weekday: 'long', 
-        // year: 'numeric', 
-        month: 'long', 
-        day: 'numeric'}
-
-    const day = today.toLocaleDateString("en-US", options)
-    
-    res.render('list',{ whatDay: day, new_entry: newTodos})
+    res.render('list',{ listTitle: day, new_entry: generalTodos})
 })
 
 app.post('/',(req,res)=>{
+
+    console.log(req.body)
     let newTodo = req.body.todo_entry
-    console.log(newTodo)
-    newTodos.push(newTodo)
-    // res.send('We got your post request: '+ newTodo)
-    res.redirect("/")
-    // res.render('list',{ whatDay: day, new_entry: newTodo})
+    if (req.body.list === "Work") {
+        workTodos.push(newTodo)
+        res.redirect('/work')
+    } else {
+        newTodos.push(newTodo)
+        res.redirect("/")
+        
+    }
+    
+})
+
+app.get('/work',(req,res)=>{
+    // res.json({status:"We are currently working on this page"})
+    res.render('list',{listTitle:"Work List", new_entry: workTodos})
+})
+
+app.get('/about',(req,res)=>{
+    res.render('about')
 })
 
 
